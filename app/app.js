@@ -18,6 +18,13 @@
   };
   //TogetherJS.config('toolName', config.toolName);
 
+  TogetherJS.on('ready', function() {
+    var shareUrl = TogetherJS.shareUrl();
+    document.getElementById('demoTxt').value = shareUrl;
+    document.getElementById('demoLabel').innerHTML = shareUrl;
+    console.log('Share URL', shareUrl);
+  });
+
   var _getUserName = function(username) {
     alert(username);
   };
