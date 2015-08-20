@@ -1,0 +1,36 @@
+{
+  "name": "cobrowse.js",
+  "version": "1.0.0",
+  "description": "cobrowse.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "http-server . -p 8080 -o -r --cors",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vs4vijay/cobrowse.js.git"
+  },
+  "keywords": [
+    "cobrowse",
+    "react",
+    "angular",
+    "reactjs",
+    "webgl",
+    "togetherjs",
+    "vs4vijay"
+  ],
+  "author": "vs4vijay@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vs4vijay/cobrowse.js/issues"
+  },
+  "homepage": "https://github.com/vs4vijay/cobrowse.js#readme",
+  "devDependencies": {
+    "optimist": "^0.6.1",
+    "websocket": "^1.0.21",
+    "websocket-server": "miksago/node-websocket-server#master"
+  },
+  "dependencies": {
+  }
+}
