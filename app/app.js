@@ -9,8 +9,9 @@
     cloneClicks: true,
     storagePrefix: 'cobrowse',
     //disableWebRTC: false,
-    //suppressJoinConfirmation: true,
-    getUserName: _getUserName
+    getUserName: _getUserName,
+    suppressInvite: true,
+    suppressJoinConfirmation: true
   };
 
   for(var key in configs) {
