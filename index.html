@@ -1,22 +1,184 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
-    <title>CoBrowse Demo</title>
-    <!-- <link rel="stylesheet" href="css/style.css" /> -->
-  </head>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html ng-app="app">
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <!--
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        -->
+    </head>
+    <body ng-controller="MainCtrl">
 
-  <body>
-    <h1>CoBrowse Demo</h1>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> App </a>
+          </div>
 
-    <div id="app">
-      Demo Text <input type="text" id="demoTxt" value="" /> <br /> <br />
-      Share URL: <span id="demoLabel"></span> <br />
-      <input type="button" onClick="demoClick()"value="Demo Click" /> <br />
-      <input type="button" onClick="startCobrowse()" value="Start CoBrowse" data-end-togetherjs-html="End CoBrowse"/> <br />
-    </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class=""><a href="#"> About <span class="sr-only">(current)</span></a></li>
+              <li><a href="#"> Contact Us </a></li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="https://github.com/vs4vijay" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Vizay <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="https://github.com/vs4vijay">Profile</a></li>
+                  <li><a href="#">Settings</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
 
-    <script src="libs/together.js"></script>
-    <script src="app/app.js"></script>
-  </body>
+      <div class="container">
+
+        <div class="alert" ng-class="{'alert-info': appModel.alertLevel == 1, 'alert-danger': appModel.alertLevel == 2, 'alert-success': appModel.alertLevel == 3 }" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          Hey, This is Demo App.
+        </div>
+
+        <h1> App <small> demo app </small></h1>
+
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputInsurer3" class="col-sm-2 control-label">Insurer</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="inputInsurer3">
+                <option>HDFC</option>
+                <option>Iffco Tokio</option>
+                <option>Reliance</option>
+                <option>ICICI</option>
+                <option>Bajaj</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputProfile3" class="col-sm-2 control-label">Profile</label>
+            <div class="col-sm-10">
+              <div class="btn-group" role="group" aria-label="Profile" id="inputProfile3">
+                <button type="button" class="btn btn-default" ng-click="appModel.alertLevel=1" ng-class="{'btn-primary': appModel.alertLevel == 1}">Left</button>
+                <button type="button" class="btn btn-default" ng-click="appModel.alertLevel=2" ng-class="{'btn-success': appModel.alertLevel == 2}">Middle</button>
+                <button type="button" class="btn btn-default" ng-click="appModel.alertLevel=3" ng-class="{'btn-danger': appModel.alertLevel == 3}">Right</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Remember me
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-6">
+              <button type="submit" class="btn btn-default" ng-click="signIn()">Sign in</button>
+            </div>
+          </div>
+        </form>
+
+        <button type="button" class="btn" ng-class="{'btn-success': !appModel.cobrowseStarted, 'btn-danger': appModel.cobrowseStarted}" name="button" ng-click="toggleCobrowse()">
+          <span ng-show="appModel.cobrowseStarted"> Stop Cobrowse  </span>
+          <span ng-show="!appModel.cobrowseStarted"> Start Cobrowse  </span>
+        </button>
+
+      </div>
+
+      <div id="footer" style="height: 60px; display: none;">
+        <div class="container">
+          <p class="muted credit">Example courtesy <a href="http://github.com/vs4vijay">Vijay Soni</a>.</p>
+        </div>
+      </div>
+
+    </body>
+
+    <script type="text/javascript" src="libs/angular.min.js"></script>
+    <script type="text/javascript" src="libs/angular-route.min.js"></script>
+    <script type="text/javascript" src="libs/angular-resource.min.js"></script>
+    <script type="text/javascript" src="libs/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/together.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript">
+
+		/*  app.js
+		*   Author: Vijay Soni (vs4vijay@gmail.com)
+		*/
+
+		var app = angular.module('app', ['ngRoute', 'ngResource']);
+
+
+		angular.module('app').controller('MainCtrl', ['$scope', 'AppService', function($scope, AppService) {
+		  $scope.appModel = {
+        cobrowseStarted: false,
+        alertLevel: 1
+      };
+
+      $scope.toggleCobrowse = function() {
+        TogetherJS(this);
+        $scope.appModel.cobrowseStarted = !$scope.appModel.cobrowseStarted;
+      };
+
+      $scope.signIn = function() {
+        $scope.appModel.text = 'Clicked!!!';
+        $scope.appModel.alertLevel = $scope.appModel.alertLevel + 1;
+      };
+
+		}]);
+
+
+		angular.module('app').service('AppService', ['$resource', function($resource) {
+
+		  var APP_ID = '5ed697172773474a9a0188365e10c4c0';
+		  // URL is http://openexchangerates.org/api/latest.json?app_id=5ed697172773474a9a0188365e10c4c0
+		  var AppResource = $resource('http://openexchangerates.org/api/:operation.json', {
+			operation: '@operation'
+		  }, {
+			getCurrencies: {
+			  method: 'GET',
+			  params: {
+				operation: 'currencies',
+				app_id: APP_ID
+			  }
+			}
+		  });
+
+		  return AppResource;
+		}]);
+
+	</script>
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    -->
 </html>
