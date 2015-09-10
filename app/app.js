@@ -4,7 +4,7 @@
 
   var configs = {
     toolName: 'CoBrowse',
-    hubBase: 'http://vijay.etechaces.com:1337/',
+    //hubBase: 'http://vijay.etechaces.com:1337/',
     dontShowClicks: true,
     cloneClicks: true,
     storagePrefix: 'cobrowse',
@@ -63,8 +63,8 @@
 
   window.addEventListener('Cobrowse.started', function(obj) {
     console.log('start', obj);
-    document.getElementById('demoLabel').innerHTML = obj.shareUrl;
-    console.info('[+] Got Share URL', obj.shareUrl);
+    //document.getElementById('demoLabel').innerHTML = obj.shareUrl;
+    console.info('[+] Got Share URL: ', obj.shareUrl);
   });
 
   window.demoClick = function(demoVar) {
